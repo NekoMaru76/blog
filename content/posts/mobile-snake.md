@@ -1,7 +1,7 @@
 +++ 
 title = 'Mobile Snake' 
 date = 2024-01-28T20:56:53+07:00 
-draft = true 
+draft = false 
 +++
 
 # How to Create a Snake Web Game
