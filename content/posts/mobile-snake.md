@@ -691,3 +691,7 @@ Then open your browser with the URL showed in the console.
 
 ## Source Code
 https://github.com/NekoMaru76/mobile-snake
+
+## Support Me
+Paypal: NekoMaru76{{< lineBreak >}}
+Discord: @ardofulian
