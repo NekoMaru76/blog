@@ -25,7 +25,7 @@ pkg update -y && pkg upgrade -y
 4. Install NodeJS with this command.
 
 ```sh
-pkg install -y node
+pkg install -y nodejs
 ```
 
 ### Requirements Installation for Linux
