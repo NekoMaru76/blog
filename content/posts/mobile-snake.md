@@ -729,3 +729,4 @@ https://github.com/NekoMaru76/mobile-snake
 ## Support Me
 
 Paypal: NekoMaru76{{< lineBreak >}} Discord: @ardofulian
+
