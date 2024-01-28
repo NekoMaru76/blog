@@ -1,48 +1,58 @@
-+++
-title = 'Mobile Snake'
-date = 2024-01-28T20:56:53+07:00
-draft = true
-+++
++++ title = 'Mobile Snake' date = 2024-01-28T20:56:53+07:00 draft = true +++
 
 # How to Create a Snake Web Game
 
 ## Requirements
+
 1. Code Editor.
 2. NodeJS & NPM.
 3. Browser.
 
 ### Requirements Installation for Android
+
 1. Install Termux from F-Droid.
 2. Open Termux.
 3. Run this command to prepare the environment needed for NodeJS.
+
 ```sh
 pkg update -y && pkg upgrade -y
 ```
+
 4. Install NodeJS with this command.
+
 ```sh
 pkg install -y node
 ```
 
-
 ### Requirements Installation for Linux
+
 1. Open your shell.
 2. Install NodeJS.
 
 ## Preparation
+
 1. Open the project folder with this command.
+
 ```sh
 cd <path/to/folder>
 ```
-If you haven't created any folder, you can use the `mkdir` command. Android users can use the prefix `/sdcard/`.
-2. Make a NPM package.
+
+If you haven't created any folder, you can use the `mkdir` command. Android
+users can use the prefix `/sdcard/`. 2. Make a NPM package.
+
 ```sh
 npm init -y
 ```
+
 3. Let's install some packages for development process.
+
 ```sh
 npm i -D prettier@14.2.1 serve@3.2.4
 ```
-4. Let's add some scripts into the `package.json` to fasten our development progress.
+
+4. Let's add some scripts into the `package.json` to fasten our development
+   progress.
+
 ```json
 {
 	...
@@ -54,7 +64,9 @@ npm i -D prettier@14.2.1 serve@3.2.4
 }
 ```
 
-5. Let's create some files and a folder. Here's the folder structure of our project.
+5. Let's create some files and a folder. Here's the folder structure of our
+   project.
+
 ```
 snake/
 ├─ node_modules/
@@ -65,20 +77,26 @@ snake/
 ├─ package-lock.json
 ├─ package.json
 ```
+
 Let's run this command to make the files and the folder you don't have!
+
 ```sh
 mkdir src/
 touch src/index.html src/style.css src/script.js
 ```
+
 6. You're ready to code now!
 
 ## Let's Code!
-1. Let's make the HTML base code.
-Here are list you need to know:
-- We will be having 1 center canvas and some buttons spread across the web. 
+
+1. Let's make the HTML base code. Here are list you need to know:
+
+- We will be having 1 center canvas and some buttons spread across the web.
 - We will include `style.css` and `script.js` into HTML.
 - We will use `eruda` as our DevTools in mobile.
-- There will be movement buttons (Left, Right, Up, Down) and control buttons (Start, Stop, Toggle Wall, Reset).
+- There will be movement buttons (Left, Right, Up, Down) and control buttons
+  (Start, Stop, Toggle Wall, Reset).
+
 ```html
 <!doctype html>
 <html>
@@ -127,6 +145,7 @@ Here are list you need to know:
 ```
 
 2. Let's style it now!
+
 ```css
 html,
 body {
@@ -232,13 +251,16 @@ body {
 }
 ```
 
-3. Now let's create the JS code! First we will need to get the `canvas` and the context.
+3. Now let's create the JS code! First we will need to get the `canvas` and the
+   context.
+
 ```js
 const canv = document.querySelector("canvas");
 const ctx = canv.getContext("2d");
 ```
 
 4. Then let's get the buttons.
+
 ```js
 const leftButton = document.getElementById("left");
 const rightButton = document.getElementById("right");
@@ -251,6 +273,7 @@ const wallButton = document.getElementById("wall");
 ```
 
 5. Let's also make variables for game states.
+
 ```js
 const sizeWidth = 25;
 const sizeHeight = 25;
@@ -262,8 +285,9 @@ let isPlaying = false,
 	direction = 0; // 0: left, 1: up, 2: right, 3: down
 ```
 
-6. Make some functions to change game states of some cases.
-Here are the list of the functions for some cases we wanna create:
+6. Make some functions to change game states of some cases. Here are the list of
+   the functions for some cases we wanna create:
+
 - Toggle Wall.
 - Pause.
 - Stop.
@@ -278,6 +302,7 @@ Here are the list of the functions for some cases we wanna create:
 - Init.
 - Setup.
 - Update.
+
 ```js
 function setSnake() {
 	snake = [[Math.round(sizeWidth / 2), Math.round(sizeHeight / 2)]];
@@ -350,7 +375,7 @@ function setup() {
 }
 
 function update() {
-	if (isPlaying)  {
+	if (isPlaying) {
 		let [x, y] = snake[0];
 
 		switch (direction) {
@@ -395,6 +420,7 @@ function update() {
 ```
 
 7. Listen for events from buttons.
+
 ```js
 leftButton.addEventListener("click", () => {
 	if (direction !== 2) direction = 0;
@@ -415,6 +441,7 @@ wallButton.addEventListener("click", wall);
 ```
 
 8. Make a function to resize the size of canvas and listen for `resize` event.
+
 ```js
 function resize() {
 	const winWidth = window.innerWidth;
@@ -437,13 +464,14 @@ window.addEventListener("resize", resize);
 ```
 
 9. Let's make a function to render our states.
+
 ```js
 function render() {
 	ctx.fillStyle = isWallEnabled ? "yellow" : "black";
 
 	ctx.fillRect(0, 0, canv.width, canv.height);
 
-	if (snake)
+	if (snake) {
 		for (let i = 0; i < snake.length; i++) {
 			const [x, y] = snake[i];
 
@@ -456,6 +484,7 @@ function render() {
 				boxSize,
 			);
 		}
+	}
 
 	if (!apple) return;
 
@@ -471,11 +500,13 @@ function render() {
 ```
 
 10. Let's listen to the `load` event.
+
 ```js
 window.addEventListener("load", setup);
 ```
 
 11. Your JS code should look like this.
+
 ```js
 const canv = document.querySelector("canvas");
 const ctx = canv.getContext("2d");
@@ -498,7 +529,7 @@ let isPlaying = false,
 	isWallEnabled = false,
 	direction = 0; // 0: left, 1: up, 2: right, 3: down
 
-	function setSnake() {
+function setSnake() {
 	snake = [[Math.round(sizeWidth / 2), Math.round(sizeHeight / 2)]];
 }
 
@@ -569,7 +600,7 @@ function setup() {
 }
 
 function update() {
-	if (isPlaying)  {
+	if (isPlaying) {
 		let [x, y] = snake[0];
 
 		switch (direction) {
@@ -612,7 +643,6 @@ function update() {
 	render();
 }
 
-
 leftButton.addEventListener("click", () => {
 	if (direction !== 2) direction = 0;
 });
@@ -654,7 +684,7 @@ function render() {
 
 	ctx.fillRect(0, 0, canv.width, canv.height);
 
-	if (snake)
+	if (snake) {
 		for (let i = 0; i < snake.length; i++) {
 			const [x, y] = snake[i];
 
@@ -667,6 +697,7 @@ function render() {
 				boxSize,
 			);
 		}
+	}
 
 	if (!apple) return;
 
@@ -684,14 +715,17 @@ window.addEventListener("load", setup);
 ```
 
 12. You guys now can run the website with this command.
+
 ```js
 npm run start
 ```
+
 Then open your browser with the URL showed in the console.
 
 ## Source Code
+
 https://github.com/NekoMaru76/mobile-snake
 
 ## Support Me
-Paypal: NekoMaru76{{< lineBreak >}}
-Discord: @ardofulian
+
+Paypal: NekoMaru76{{< lineBreak >}} Discord: @ardofulian
